@@ -3,8 +3,8 @@ import cx from 'classnames'
 import { Button } from 'antd'
 import { Dish, Meal } from '@/types'
 import Step from '@/components/Step'
-import Step1Con from '@/components/Content/step1'
-import Step2Con from '@/components/Content/step2'
+import Step1Con from '@/components/Content/stepOne'
+import Step2Con from '@/components/Content/stepTwo'
 
 import styles from './index.module.css'
 
