@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
+import { FC, useState, useMemo, useEffect } from 'react'
 import cx from 'classnames'
 import { Button } from 'antd'
 import { Dish, Meal } from '@/types'
 import Step from '@/components/Step'
 import Step1Con from '@/components/Content/step1'
+import Step2Con from '@/components/Content/step2'
 
 import styles from './index.module.css'
 
@@ -16,7 +17,18 @@ const STEP_ITEMS = ['Step 1', 'Step 2', 'Step 3', 'Review']
 const Container: FC<IProps> = ({ data }) => {
   const [step, setStep] = useState<number>(1)
   const [meal, setMeal] = useState<Meal | null>(null)
-  const [peopleSize, setPeopleSize] = useState<number>(1)
+  const [peopleSize, setPeopleSize] = useState<number | null>(1)
+  const [restaurant, setRestaurant] = useState('')
+
+  const canBeSelectedRestaurant = useMemo(
+    () => (meal ? data.filter((i) => i.availableMeals.includes(meal!)) : []),
+    [meal]
+  )
+
+  useEffect(() => {
+    /* if meal change, reset restaurant */
+    setRestaurant('')
+  }, [meal])
 
   const toPrev = () => {
     setStep((s) => s - 1)
@@ -24,8 +36,6 @@ const Container: FC<IProps> = ({ data }) => {
   const toNext = () => {
     setStep((s) => s + 1)
   }
-
-  console.log('meal', meal, 'peopleSize', peopleSize)
 
   return (
     <div className={styles.wrapper}>
@@ -40,6 +50,13 @@ const Container: FC<IProps> = ({ data }) => {
           peopleSize={peopleSize}
           onChangeMeal={setMeal}
           onChangeSize={setPeopleSize}
+        />
+      )}
+      {step === 2 && (
+        <Step2Con
+          options={canBeSelectedRestaurant}
+          restaurant={restaurant}
+          onChange={setRestaurant}
         />
       )}
 
