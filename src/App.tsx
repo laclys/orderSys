@@ -1,10 +1,24 @@
-import type { FC } from 'react'
-import { Button } from 'antd'
+import { FC, useEffect } from 'react'
+import { useFetchOrderData } from '@/models/useFetchOrderData'
+import Container from '@/components/Container'
+
+import styles from './app.module.css'
 
 const App: FC = () => {
+  const {
+    state: { data, loading },
+    fetch,
+  } = useFetchOrderData()
+
+  useEffect(() => {
+    fetch()
+  }, [])
+
+  console.log('data', data)
+
   return (
-    <div>
-      <Button>Hello</Button>
+    <div className={styles.wrapper}>
+      <Container data={data?.dishes || []} />
     </div>
   )
 }
