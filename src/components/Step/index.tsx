@@ -1,8 +1,6 @@
-import { FC, useState } from 'react'
+import { FC, memo } from 'react'
 import { Radio } from 'antd'
 import type { RadioChangeEvent } from 'antd';
-
-import styles from './index.module.css'
 
 interface IProps {
   current: number
@@ -23,4 +21,4 @@ const Step: FC<IProps> = ({ current, items, onChange }) => {
   )
 }
 
-export default Step
+export default memo(Step)

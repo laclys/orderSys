@@ -1,8 +1,9 @@
 import { FC, useState } from 'react'
 import cx from 'classnames'
 import { Button } from 'antd'
-import { Dish } from '@/types'
+import { Dish, Meal } from '@/types'
 import Step from '@/components/Step'
+import Step1Con from '@/components/Content/step1'
 
 import styles from './index.module.css'
 
@@ -13,7 +14,9 @@ interface IProps {
 const STEP_ITEMS = ['Step 1', 'Step 2', 'Step 3', 'Review']
 
 const Container: FC<IProps> = ({ data }) => {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState<number>(1)
+  const [meal, setMeal] = useState<Meal | null>(null)
+  const [peopleSize, setPeopleSize] = useState<number>(1)
 
   const toPrev = () => {
     setStep((s) => s - 1)
@@ -22,17 +25,24 @@ const Container: FC<IProps> = ({ data }) => {
     setStep((s) => s + 1)
   }
 
-  return (
-    <div className={styles.wrapper} >
+  console.log('meal', meal, 'peopleSize', peopleSize)
 
-      <p className={styles.title} >
-        Pre-order System
-      </p>
+  return (
+    <div className={styles.wrapper}>
+      <p className={styles.title}>Pre-order System</p>
 
       <Step current={step} items={STEP_ITEMS} onChange={setStep} />
 
       {/* todo content */}
-    
+      {step === 1 && (
+        <Step1Con
+          meal={meal}
+          peopleSize={peopleSize}
+          onChangeMeal={setMeal}
+          onChangeSize={setPeopleSize}
+        />
+      )}
+
       <div className={styles.btnWrapper}>
         <Button
           className={cx(styles.btn, styles.prev)}

@@ -1,0 +1,17 @@
+.content {
+  margin: 40px 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-bottom: 14px;
+}
+
+:global(.ant-input-number) {
+    width: 160px;
+}
