@@ -8,8 +8,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build --mode test",
+    "preview": "vite preview",
+    "build:prod": "tsc && vite build --mode prod"
   },
   "dependencies": {
     "antd": "^5.1.5",
