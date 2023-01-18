@@ -43,17 +43,29 @@ const Container: FC<IProps> = ({ data }) => {
   }
   const toNext = () => {
     if (step === 3) {
-      if (allDish.filter((i) => i.isSelect).length > peopleSize!) {
+      const selectedDishs = allDish.filter((i) => i.isSelect)
+      const dishCount = selectedDishs.reduce(
+        (total, item) => total + item.count,
+        0
+      )
+      if (dishCount < peopleSize!) {
         message.warning(PEOPLE_SIZE_WARN, 2)
         return
       }
-      if (!meal || !peopleSize || !restaurant || allDish.length === 0) {
+      if (!meal || !peopleSize || !restaurant || selectedDishs.length === 0) {
         message.warning(EMPTY_WARN, 2)
         return
       }
     }
-
     setStep((s) => s + 1)
+  }
+
+  const toRest = () => {
+    setStep(1)
+    setMeal(null)
+    setPeopleSize(1)
+    setRestaurant('')
+    setAllDish([])
   }
 
   return (
@@ -93,6 +105,7 @@ const Container: FC<IProps> = ({ data }) => {
           size={peopleSize!}
           restaurant={restaurant!}
           dishs={allDish}
+          onRest={toRest}
         />
       )}
 

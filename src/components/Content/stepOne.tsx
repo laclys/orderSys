@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Select, InputNumber } from 'antd'
 import { Meal } from '@/types'
 

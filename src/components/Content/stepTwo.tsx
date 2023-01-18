@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Select } from 'antd'
 import { FormatDish } from '@/types'
 
