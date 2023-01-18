@@ -50,7 +50,7 @@ const Step1: FC<IProps> = ({
           value={peopleSize}
           onChange={onChangeSize}
           min={1}
-          max={100}
+          max={10}
           precision={0}
         />
       </div>
