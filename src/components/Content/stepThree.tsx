@@ -54,10 +54,9 @@ const Step3: FC<IProps> = ({ data, allDish, onChange }) => {
       })
       onChange(allDish.concat([]))
       setItem('')
+      message.success('add success!', 2)
     } catch (e) {}
   }
-
-  // console.log('allDish', allDish)
 
   return (
     <div className={styles.content}>
@@ -103,7 +102,7 @@ const Step3: FC<IProps> = ({ data, allDish, onChange }) => {
         {allDish
           .filter((i) => i.isSelect)
           .map((j) => (
-            <div className={styles.reviewItem}>
+            <div key={j.name} className={styles.reviewItem}>
               {j.name} - {j.count}
             </div>
           ))}

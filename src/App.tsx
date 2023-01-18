@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import { Spin } from 'antd'
 import { useFetchOrderData } from '@/models/useFetchOrderData'
 import Container from '@/components/Container'
 
@@ -14,12 +15,12 @@ const App: FC = () => {
     fetch()
   }, [])
 
-  console.log('data', data)
-
   return (
-    <div className={styles.wrapper}>
-      <Container data={data?.dishes || []} />
-    </div>
+    <Spin spinning={loading}>
+      <div className={styles.wrapper}>
+        <Container data={data?.dishes || []} />
+      </div>
+    </Spin>
   )
 }
 
