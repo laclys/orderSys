@@ -1,12 +1,16 @@
 import { FC, useState, useMemo, useEffect } from 'react'
 import cx from 'classnames'
-import { Button } from 'antd'
-import { Dish, Meal } from '@/types'
+import { Button, message } from 'antd'
+import { Dish, Meal, FormatDish } from '@/types'
 import Step from '@/components/Step'
 import Step1Con from '@/components/Content/stepOne'
 import Step2Con from '@/components/Content/stepTwo'
+import Step3Con from '@/components/Content/stepThree'
+import Review from '@/components/Content/review'
+import { formatDishData } from '@/utils/formatData'
 
 import styles from './index.module.css'
+import { EMPTY_WARN, PEOPLE_SIZE_WARN } from '@/consts/tips'
 
 interface IProps {
   data: Dish[]
@@ -19,9 +23,13 @@ const Container: FC<IProps> = ({ data }) => {
   const [meal, setMeal] = useState<Meal | null>(null)
   const [peopleSize, setPeopleSize] = useState<number | null>(1)
   const [restaurant, setRestaurant] = useState('')
+  const [allDish, setAllDish] = useState<FormatDish['item']>([])
 
   const canBeSelectedRestaurant = useMemo(
-    () => (meal ? data.filter((i) => i.availableMeals.includes(meal!)) : []),
+    () =>
+      meal
+        ? formatDishData(data.filter((i) => i.availableMeals.includes(meal!)))
+        : [],
     [meal]
   )
 
@@ -34,6 +42,17 @@ const Container: FC<IProps> = ({ data }) => {
     setStep((s) => s - 1)
   }
   const toNext = () => {
+    if (step === 3) {
+      if (allDish.filter((i) => i.isSelect).length > peopleSize!) {
+        message.warning(PEOPLE_SIZE_WARN, 2)
+        return
+      }
+      if (!meal || !peopleSize || !restaurant || allDish.length === 0) {
+        message.warning(EMPTY_WARN, 2)
+        return
+      }
+    }
+
     setStep((s) => s + 1)
   }
 
@@ -57,6 +76,23 @@ const Container: FC<IProps> = ({ data }) => {
           options={canBeSelectedRestaurant}
           restaurant={restaurant}
           onChange={setRestaurant}
+        />
+      )}
+      {step === 3 && (
+        <Step3Con
+          data={
+            canBeSelectedRestaurant?.filter((i) => i.name === restaurant)?.[0]
+          }
+          allDish={allDish}
+          onChange={setAllDish}
+        />
+      )}
+      {step === 4 && (
+        <Review
+          meal={meal!}
+          size={peopleSize!}
+          restaurant={restaurant!}
+          dishs={allDish}
         />
       )}
 

@@ -120,12 +120,6 @@
       "availableMeals": ["lunch", "dinner"]
     },
     {
-      "id": 21,
-      "name": "Pepperoni Pizza",
-      "restaurant": "Pizzeria",
-      "availableMeals": ["lunch", "dinner"]
-    },
-    {
       "id": 22,
       "name": "Pepperoni Pizza",
       "restaurant": "Pizzeria",

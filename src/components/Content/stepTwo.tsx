@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Select } from 'antd'
-import { Dish } from '@/types'
+import { FormatDish } from '@/types'
 
 import styles from './index.module.css'
 
 interface IProps {
-  options: Dish[]
+  options: FormatDish[]
   restaurant: string
   onChange: (s: string) => void
 }
@@ -24,7 +24,7 @@ const Step2: FC<IProps> = ({ restaurant, onChange, options }) => {
           onSelect={onChange}
         >
           {options.map((i) => (
-            <Option key={i.id} value={i.name}>
+            <Option key={i.name} value={i.name}>
               {i.name}
             </Option>
           ))}

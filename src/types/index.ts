@@ -9,4 +9,14 @@ export interface Dish {
   name: string
   restaurant: string
   availableMeals: Meal[]
+  count?: number
+}
+
+export interface FormatDish {
+  name: string
+  item: {
+    name: string
+    count: number
+    isSelect?: boolean
+  }[]
 }
