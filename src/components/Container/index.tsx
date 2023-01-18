@@ -8,9 +8,9 @@ import Step2Con from '@/components/Content/stepTwo'
 import Step3Con from '@/components/Content/stepThree'
 import Review from '@/components/Content/review'
 import { formatDishData } from '@/utils/formatData'
+import { EMPTY_WARN, PEOPLE_SIZE_WARN } from '@/consts/tips'
 
 import styles from './index.module.css'
-import { EMPTY_WARN, PEOPLE_SIZE_WARN } from '@/consts/tips'
 
 interface IProps {
   data: Dish[]

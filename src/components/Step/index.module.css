@@ -1,0 +1,7 @@
+.wrapper {
+  
+}
+
+:global(.ant-radio-button-wrapper) {
+  pointer-events: none;
+}
