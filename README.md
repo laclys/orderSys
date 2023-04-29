@@ -10,8 +10,8 @@ yarn run dev
 # build
 yarn run build:prod
 # e2e test (by Playwright)  (/tests/...)
-yarn run test
-# add test report
+yarn run test 
+# add test report  (/playwright-report/）
 yarn run report
 ```
 
